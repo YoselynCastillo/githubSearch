@@ -1,0 +1,26 @@
+<!-- --------------- User Info --------------- -->
+<div class="row" *ngIf="visibility">
+    <div class="col-sm-4">
+        <div class="card border-danger" style="width: 18rem;">
+            <img src={{user?.avatar_url}} class="card-img-top" alt="...">
+            <div class="card-body text-danger">
+                <h5 class="card-title">Name: {{user?.name}}</h5>
+                <p>User: {{user?.login}}</p>
+                <p>Bio: {{user?.bio}}</p>
+            </div>
+        </div>
+    </div>
+<!-- --------------- Repos in Card --------------- -->
+    <div class="col-sm-8">
+        <div class="row row-cols-1 row-cols-sm-3 border-primary">
+            <div class="col mb-4" *ngFor="let repo of repos">
+                <div class="card h-100">
+                    <div class="card-body text-primary">
+                        <a class="card-title h5" href={{repo.svn_url}} target="_blank">{{repo.name}}</a>
+                        <p class="card-text">Stars: {{repo.stargazers_count}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
