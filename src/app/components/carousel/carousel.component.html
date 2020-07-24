@@ -1,0 +1,80 @@
+<div class="cards">
+    <owl-carousel-o [options]="customOptions">
+
+        <ng-container *ngFor="let city of cities">
+            <ng-template carouselSlide [id]="city.id">
+                <!-- <img [src]="slide.src" [alt]="slide.alt" [title]="slide.title"> -->
+                <!-- <div class="card border-danger" style="width: 18rem;"> -->
+                <div class="card bgG sizeCard">
+
+                    <!-- <img src={{http://api.openweathermap.org/img/w/{{city.weather[0].description}}.png}} class="card-img-top" alt="..."> -->
+                    <div class="card-body text-center">
+                        <h5 class="text-white title">{{city.name | uppercase}}</h5>
+                        <!-- <img src="http://api.openweathermap.org/img/w/{{city.weather[0].icon}}.png" alt="..."> -->
+                        <img [src]="'/assets/weather-icons/' +city.weather[0].icon+'.png'" class="arrow">
+                        <p class="text-white temp">{{city.main.temp}}°</p>
+                        <p class="text-white descp">{{city.weather[0].description | uppercase}}</p>
+                        <!-- TEMP_MIN_MAX -->
+                        <div class="d-flex flex-row justify-content-around">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-caret-down text-success mb-0"></i>
+                                <p class="text-white tempMM">{{city.main.temp_min}}</p>
+                                <p class="text-success minmax">Min</p>
+                            </div>
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-caret-up text-danger mb-0"></i>
+                                <label class="text-white  tempMM">{{city.main.temp_max}}</label>
+                                <label class="text-danger minmax">Max</label>
+                                <!-- <p class="text-white  temp">{{city.main.temp_min}}</p>
+                                <p class="text-danger">Max</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+        </ng-container>
+        <ng-template carouselSlide>
+            <div carouselSlide class="card bgG sizeCard">
+                <div class="card-body text-dark text-center d-flex flex-column align-items-center">
+                    <h5 class="card-title text-white">ADD CITY </h5>
+                    <div class="plus">
+                        <img data-toggle="modal" data-target="#addCity" [src]="'/assets/weather-icons/plus.png'">
+                    </div>
+                    <!-- <a data-toggle="modal" data-target="#addCity">AGREGAR</a> -->
+                    <div class="city">
+                        <img [src]="'/assets/weather-icons/city.png'" class="add">
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+    </owl-carousel-o>
+</div>
+
+<!-- -------------MODAL------------- -->
+<div class="modal fade" id="addCity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ADD CITY</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="text" placeholder='City' name="city" [(ngModel)]="city" class="form-control mb-2">
+                    <input type="text" placeholder='Country Code' name="countryCode" [(ngModel)]="countryCode"
+                        class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)='addCity()' type="submit" class="btn btn-outline-dark" data-dismiss="modal"
+                    aria-label="Close">
+                    ADD
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
